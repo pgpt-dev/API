@@ -1,16 +1,40 @@
+
 # PrivateGPT API v1 Pre-Release Documentation
+
+## Table of Contents
+1. [Overview](#overview)
+2. [Authentication](#authentication)
+   - [Login](#login)
+   - [Logout](#logout)
+3. [Chat Management](#chat-management)
+   - [Start a New Chat](#start-a-new-chat)
+   - [Continue an Existing Chat](#continue-an-existing-chat)
+4. [Source Management](#source-management)
+   - [Add a New Source](#add-a-new-source)
+   - [Edit an Existing Source](#edit-an-existing-source)
+5. [Group Management](#group-management)
+   - [Get All Groups](#get-all-groups)
+   - [Add a New Group](#add-a-new-group)
+6. [User Management](#user-management)
+   - [Create a New User](#create-a-new-user)
+   - [Delete a User](#delete-a-user)
+7. [Additional Notes](#additional-notes)
+8. [License](#license)
+
+---
 
 ## Overview
 
-This repository contains the pre-release definition of the PrivateGPT API version 1.3. The API enables secure interaction with PrivateGPT's features, including authentication, chat, source management, group management, and user management.
+The PrivateGPT API v1.3 provides a secure and structured way to interact with PrivateGPT's features. The key functionalities include managing authentication, chats, sources, groups, and users.
 
 ---
 
 ## Authentication
 
 ### Login
-**Endpoint:**  
-`POST {base-url}/api/v1/login`
+| **Method** | **Endpoint**                |
+|------------|-----------------------------|
+| POST       | `{base-url}/api/v1/login`   |
 
 **Headers:**
 - Accept: `application/json`
@@ -35,11 +59,12 @@ This repository contains the pre-release definition of the PrivateGPT API versio
 ```
 
 **Description:**  
-Obtain an API token for authenticating subsequent requests.
+Use this endpoint to obtain an API token.
 
 ### Logout
-**Endpoint:**  
-`POST {base-url}/api/v1/logout`
+| **Method** | **Endpoint**                |
+|------------|-----------------------------|
+| POST       | `{base-url}/api/v1/logout`  |
 
 **Headers:**
 - Accept: `application/json`
@@ -59,8 +84,9 @@ Obtain an API token for authenticating subsequent requests.
 ## Chat Management
 
 ### Start a New Chat
-**Endpoint:**  
-`POST {base-url}/api/v1/chats`
+| **Method** | **Endpoint**                |
+|------------|-----------------------------|
+| POST       | `{base-url}/api/v1/chats`   |
 
 **Headers:**
 - Accept: `application/json`
@@ -90,8 +116,9 @@ Obtain an API token for authenticating subsequent requests.
 ```
 
 ### Continue an Existing Chat
-**Endpoint:**  
-`POST {base-url}/api/v1/chats/{chatId}`
+| **Method** | **Endpoint**                      |
+|------------|-----------------------------------|
+| POST       | `{base-url}/api/v1/chats/{chatId}`|
 
 **Headers:**
 - Accept: `application/json`
@@ -109,8 +136,9 @@ Obtain an API token for authenticating subsequent requests.
 ## Source Management
 
 ### Add a New Source
-**Endpoint:**  
-`POST {base-url}/api/v1/sources`
+| **Method** | **Endpoint**                  |
+|------------|-------------------------------|
+| POST       | `{base-url}/api/v1/sources`   |
 
 **Headers:**
 - Accept: `application/json`
@@ -137,8 +165,9 @@ Obtain an API token for authenticating subsequent requests.
 ```
 
 ### Edit an Existing Source
-**Endpoint:**  
-`PATCH {base-url}/api/v1/sources/{sourceId}`
+| **Method** | **Endpoint**                      |
+|------------|-----------------------------------|
+| PATCH      | `{base-url}/api/v1/sources/{sourceId}` |
 
 **Headers:**
 - Accept: `application/json`
@@ -149,8 +178,9 @@ Obtain an API token for authenticating subsequent requests.
 ## Group Management
 
 ### Get All Groups
-**Endpoint:**  
-`GET {base-url}/api/v1/groups`
+| **Method** | **Endpoint**                |
+|------------|-----------------------------|
+| GET        | `{base-url}/api/v1/groups`  |
 
 **Headers:**
 - Accept: `application/json`
@@ -169,8 +199,9 @@ Obtain an API token for authenticating subsequent requests.
 ```
 
 ### Add a New Group
-**Endpoint:**  
-`POST {base-url}/api/v1/groups`
+| **Method** | **Endpoint**                |
+|------------|-----------------------------|
+| POST       | `{base-url}/api/v1/groups`  |
 
 **Headers:**
 - Accept: `application/json`
@@ -188,8 +219,9 @@ Obtain an API token for authenticating subsequent requests.
 ## User Management
 
 ### Create a New User
-**Endpoint:**  
-`POST {base-url}/api/v1/users`
+| **Method** | **Endpoint**                |
+|------------|-----------------------------|
+| POST       | `{base-url}/api/v1/users`   |
 
 **Headers:**
 - Accept: `application/json`
@@ -201,8 +233,8 @@ Obtain an API token for authenticating subsequent requests.
   "name": "User Name",
   "email": "user@example.com",
   "password": "UserPassword123",
-  "language": "en", // optional, defaults to "en"
-  "timezone": "UTC", // optional, defaults to "Europe/Berlin"
+  "language": "en", // optional
+  "timezone": "UTC", // optional
   "usePublic": true,
   "groups": ["Group A"],
   "roles": ["Sources"],
@@ -221,8 +253,9 @@ Obtain an API token for authenticating subsequent requests.
 ```
 
 ### Delete a User
-**Endpoint:**  
-`DELETE {base-url}/api/v1/users`
+| **Method** | **Endpoint**                |
+|------------|-----------------------------|
+| DELETE     | `{base-url}/api/v1/users`   |
 
 **Headers:**
 - Accept: `application/json`
