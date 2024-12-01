@@ -12,11 +12,14 @@
 4. [Source Management](#source-management)
    - [Add a New Source](#add-a-new-source)
    - [Edit an Existing Source](#edit-an-existing-source)
+   - [Delete a Source](#delete-a-source)
 5. [Group Management](#group-management)
    - [Get All Groups](#get-all-groups)
    - [Add a New Group](#add-a-new-group)
+   - [Delete a Group](#delete-a-group)
 6. [User Management](#user-management)
    - [Create a New User](#create-a-new-user)
+   - [Edit an Existing User](#edit-an-existing-user)
    - [Delete a User](#delete-a-user)
 7. [Additional Notes](#additional-notes)
 8. [License](#license)
@@ -57,9 +60,6 @@ The PrivateGPT API v1.3 provides a secure and structured way to interact with Pr
   "status": 200
 }
 ```
-
-**Description:**  
-Use this endpoint to obtain an API token.
 
 ### Logout
 | **Method** | **Endpoint**                |
@@ -173,6 +173,42 @@ Use this endpoint to obtain an API token.
 - Accept: `application/json`
 - Authorization: `Bearer {api-token}`
 
+**Body:**
+```json
+{
+  "title": "Updated Title",
+  "groups": ["Updated Group"], // optional
+  "content": "Updated content in Markdown format"
+}
+```
+
+**Response:**
+```json
+{
+  "data": {},
+  "message": "success",
+  "status": 200
+}
+```
+
+### Delete a Source
+| **Method** | **Endpoint**                      |
+|------------|-----------------------------------|
+| DELETE     | `{base-url}/api/v1/sources/{sourceId}`|
+
+**Headers:**
+- Accept: `application/json`
+- Authorization: `Bearer {api-token}`
+
+**Response:**
+```json
+{
+  "data": {},
+  "message": "success",
+  "status": 200
+}
+```
+
 ---
 
 ## Group Management
@@ -214,6 +250,40 @@ Use this endpoint to obtain an API token.
 }
 ```
 
+**Response:**
+```json
+{
+  "data": {},
+  "message": "success",
+  "status": 200
+}
+```
+
+### Delete a Group
+| **Method** | **Endpoint**                |
+|------------|-----------------------------|
+| DELETE     | `{base-url}/api/v1/groups`  |
+
+**Headers:**
+- Accept: `application/json`
+- Authorization: `Bearer {api-token}`
+
+**Body:**
+```json
+{
+  "groupName": "Group A"
+}
+```
+
+**Response:**
+```json
+{
+  "data": {},
+  "message": "success",
+  "status": 200
+}
+```
+
 ---
 
 ## User Management
@@ -252,6 +322,34 @@ Use this endpoint to obtain an API token.
 }
 ```
 
+### Edit an Existing User
+| **Method** | **Endpoint**                      |
+|------------|-----------------------------------|
+| PATCH      | `{base-url}/api/v1/users`         |
+
+**Headers:**
+- Accept: `application/json`
+- Authorization: `Bearer {api-token}`
+
+**Body:**
+```json
+{
+  "email": "user@example.com",
+  "name": "Updated Name",
+  "language": "en",
+  "groups": ["Updated Group"]
+}
+```
+
+**Response:**
+```json
+{
+  "data": {},
+  "message": "success",
+  "status": 200
+}
+```
+
 ### Delete a User
 | **Method** | **Endpoint**                |
 |------------|-----------------------------|
@@ -265,6 +363,15 @@ Use this endpoint to obtain an API token.
 ```json
 {
   "email": "user@example.com"
+}
+```
+
+**Response:**
+```json
+{
+  "data": {},
+  "message": "success",
+  "status": 200
 }
 ```
 
