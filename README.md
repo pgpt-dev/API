@@ -1,5 +1,5 @@
 
-# PrivateGPT API v1 Pre-Release Documentation
+# PrivateGPT API v1.3 Documentation
 
 ## Table of Contents
 1. [Overview](#overview)
@@ -64,7 +64,7 @@ The PrivateGPT API v1.3 provides a secure and structured way to interact with Pr
 ### Logout
 | **Method** | **Endpoint**                |
 |------------|-----------------------------|
-| POST       | `{base-url}/api/v1/logout`  |
+| DELETE     | `{base-url}/api/v1/logout`  |
 
 **Headers:**
 - Accept: `application/json`
@@ -108,7 +108,10 @@ The PrivateGPT API v1.3 provides a secure and structured way to interact with Pr
   "data": {
     "chatId": "your-chat-id",
     "answer": "response-answer",
-    "sources": ["source-id-1", "source-id-2"]
+    "sources": [
+                "source-id-1", 
+                "source-id-2"
+               ]
   },
   "message": "success",
   "status": 200
@@ -128,6 +131,65 @@ The PrivateGPT API v1.3 provides a secure and structured way to interact with Pr
 ```json
 {
   "question": "Your follow-up question?"
+}
+```
+
+**Response:**
+```json
+{
+  "data": {
+    "chatId": "your-chat-id",
+    "answer": "response-answer",
+    "sources": [
+                "source-id-1", 
+                "source-id-2"
+               ]
+  },
+  "message": "success",
+  "status": 200
+}
+```
+
+---
+
+### Get Informations about an existing Chat
+| **Method** | **Endpoint**                      |
+|------------|-----------------------------------|
+| GET        | `{base-url}/api/v1/chats/{chatId}`|
+
+**Headers:**
+- Accept: `application/json`
+- Authorization: `Bearer {api-token}`
+
+**Body:**
+```json
+{
+  "question": "Your follow-up question?"
+}
+```
+
+**Response:**
+```json
+{
+    "data": {
+        "chatId": "your-chat-id",
+        "title": "My Chat",
+        "language": "en",
+        "groups": ["Group A", "Internals"],
+        "messages": [
+            {
+                "question": "What is PrivateGPT?",
+                "answer": "PrivateGPT is mindblowing!",
+                "language": "en",
+                "sources": [
+                    "aa14e3c4-dfb4-4088-b379-362a3772d3bf",
+                    "fdb75197-aab6-4c10-bd73-1ed1475e00cb"
+                ]
+            }
+        ]
+    },
+    "message": "success",
+    "status": 200
 }
 ```
 
@@ -209,6 +271,36 @@ The PrivateGPT API v1.3 provides a secure and structured way to interact with Pr
 }
 ```
 
+### Get all sources for the provided group
+| **Method** | **Endpoint**                  |
+|------------|-------------------------------|
+| POST       | `{base-url}/api/v1/sources`   |
+
+**Headers:**
+- Accept: `application/json`
+- Authorization: `Bearer {api-token}`
+
+**Body:**
+```json
+{
+  "groupName": ["Group A"], // optional
+}
+```
+
+**Response:**
+```json
+{
+  "data": {
+    "sourcees": [
+            "<source-id 1>",
+            "<source-id 2>",
+            "<source-id 3>",
+        ]
+    },
+  "message": "success",
+  "status": 200
+}
+```
 ---
 
 ## Group Management
