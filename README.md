@@ -17,6 +17,7 @@
    - [Get All Groups](#get-all-groups)
    - [Add a New Group](#add-a-new-group)
    - [Delete a Group](#delete-a-group)
+   - [Get all sources for the provided group](#Get-all-sources-for-the-provided-group)
 6. [User Management](#user-management)
    - [Create a New User](#create-a-new-user)
    - [Edit an Existing User](#edit-an-existing-user)
