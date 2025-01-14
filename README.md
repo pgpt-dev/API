@@ -5,12 +5,12 @@
 2. [**Authentication**](#authentication)
    - [Login](#login)
    - [Logout](#logout)
-3. [**Chat Management**](#chat-management)
+3. [**Chat Conversations**](#chat-management)
    - [Start a New Chat](#start-a-new-chat)
    - [Continue an Existing Chat](#continue-an-existing-chat)
    - [Get Information about an Existing Chat](#get-information-about-an-existing-chat)
 4. [**Source Management**](#source-management)
-   - [Add a New Source](#add-a-new-source)
+   - [Store a New Source via Markdown](#add-a-new-source)
    - [Edit an Existing Source](#edit-an-existing-source)
    - [Delete a Source](#delete-a-source)
    - [Get All Sources for the Provided Group](#get-all-sources-for-the-provided-group)
@@ -92,7 +92,7 @@ Invalidate the API-Token
 
 ---
 
-## Chat Management
+## Chat Conversations
 
 ### Start a New Chat
 Start a new chat. To use the LLMs ‘document knowledge’ (RAG), one or more available groups must be provided, or usePublic needs to be
@@ -201,10 +201,6 @@ Continue an already started chat.
                 "question": "What is PrivateGPT?",
                 "answer": "PrivateGPT is mindblowing!",
                 "language": "en",
-                "sources": [
-                    "aa14e3c4-dfb4-4088-b379-362a3772d3bf",
-                    "fdb75197-aab6-4c10-bd73-1ed1475e00cb"
-                ]
             }
         ]
     },
@@ -217,7 +213,7 @@ Continue an already started chat.
 
 ## Source Management
 
-### Add a New Source
+### Store a New Source via Markdown
 | **Method** | **Endpoint**                  |
 |------------|-------------------------------|
 | POST       | `{base-url}/api/v1/sources`   |
@@ -229,7 +225,7 @@ Continue an already started chat.
 **Body:**
 ```json
 {
-  "title": "Source Title",
+  "name": "Source Title",
   "groups": ["Group A"], // optional
   "content": "Content in Markdown format"
 }
@@ -239,7 +235,7 @@ Continue an already started chat.
 ```json
 {
   "data": {
-    "sourceId": "new-source-id"
+    "documentId": "new-source-id"
   },
   "message": "success",
   "status": 200
@@ -258,8 +254,8 @@ Continue an already started chat.
 **Body:**
 ```json
 {
-  "title": "Updated Title",
-  "groups": ["Updated Group"], // optional
+  "name": "My updated Title",
+  "groups": ["Updated Group"], // optional, list may be empty if source should be public
   "content": "Updated content in Markdown format"
 }
 ```
@@ -293,9 +289,9 @@ All Fields are optional and remain unchanged if not provided.
 ```
 
 ### Get all sources for the provided group
-| **Method** | **Endpoint**                  |
-|------------|-------------------------------|
-| POST       | `{base-url}/api/v1/sources`   |
+| **Method** | **Endpoint**                        |
+|------------|-------------------------------------|
+| POST       | `{base-url}/api/v1/sources/group`   |
 
 **Headers:**
 - Accept: `application/json`
@@ -454,13 +450,19 @@ options.
 **Body:**
 ```json
 {
+  "name": "User Name",
   "email": "user@example.com",
-  "name": "Updated Name",
-  "language": "en",
-  "groups": ["Updated Group"]
+  "password": "UserPassword123",
+  "language": "en", // optional
+  "timezone": "UTC", // optional
+  "usePublic": true,
+  "groups": ["Group A"],
+  "roles": ["Sources"],
+  "activateFtp": true,
+  "ftpPassword": "FTPPassword!"
 }
 ```
-Note: All other fields than e-mail are optional and remain unchanged if not provided.
+Note: All other fields than `e-mail` are //optional and remain unchanged if not provided.
 
 **Response:**
 ```json
