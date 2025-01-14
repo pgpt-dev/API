@@ -451,10 +451,10 @@ options.
 ```json
 {
   "name": "User Name",
-  "email": "user@example.com",
+  "email": "user@example.com", // mandatory
   "password": "UserPassword123",
-  "language": "en", // optional
-  "timezone": "UTC", // optional
+  "language": "en", 
+  "timezone": "UTC", 
   "usePublic": true,
   "groups": ["Group A"],
   "roles": ["Sources"],
@@ -462,7 +462,7 @@ options.
   "ftpPassword": "FTPPassword!"
 }
 ```
-Note: All other fields than `e-mail` are //optional and remain unchanged if not provided.
+Note: All other fields than `e-mail` are // optional and remain unchanged if not provided.
 
 **Response:**
 ```json
