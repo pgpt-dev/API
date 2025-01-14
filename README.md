@@ -285,7 +285,7 @@ Get source informations about an existing group.
   "groupName": "Group A"
 }
 
-**Response:**
+** Response**
 
 {
   "data": {
@@ -300,7 +300,6 @@ Get source informations about an existing group.
   "message": "success",
   "status": 200
 }
-
 
 ### 3.3 Edit Source
 Update an existing Source.
