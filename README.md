@@ -181,13 +181,6 @@ Continue an already started chat.
 - Accept: `application/json`
 - Authorization: `Bearer {api-token}`
 
-**Body:**
-```json
-{
-  "question": "Your follow-up question?"
-}
-```
-
 **Response:**
 ```json
 {
@@ -308,7 +301,7 @@ All Fields are optional and remain unchanged if not provided.
 ```json
 {
   "data": {
-    "sourcees": [
+    "sources": [
             "<source-id 1>",
             "<source-id 2>",
             "<source-id 3>",
