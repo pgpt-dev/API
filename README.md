@@ -3,25 +3,25 @@
 ## Table of Contents
 1. [**Overview**](#overview)
 2. [**Authentication**](#authentication)
-   - [Login](#login)
-   - [Logout](#logout)
-3. [**Chat Conversations**](#chat-management)
-   - [Start a New Chat](#start-a-new-chat)
-   - [Continue an Existing Chat](#continue-an-existing-chat)
-   - [Get Information about an Existing Chat](#get-information-about-an-existing-chat)
+   - [1.0 Login](#10-login)
+   - [1.1 Logout](#11-logout)
+3. [**Chat Conversations**](#chat-conversations)
+   - [2.0 Start a New Chat](#20-start-a-new-chat)
+   - [2.1 Continue an Existing Chat](#21-continue-an-existing-chat)
+   - [2.2 Get Information about an Existing Chat](#22-get-information-about-an-existing-chat)
 4. [**Source Management**](#source-management)
-   - [Store a New Source via Markdown](#add-a-new-source)
-   - [Edit an Existing Source](#edit-an-existing-source)
-   - [Delete a Source](#delete-a-source)
-   - [Get All Sources for the Provided Group](#get-all-sources-for-the-provided-group)
+   - [3.0 Store a New Source via Markdown](#30-store-a-new-source-via-markdown)
+   - [3.1 Get All Sources for the Provided Group](#31-get-all-sources-for-the-provided-group)
+   - [3.2 Edit an Existing Source](#32-edit-an-existing-source)
+   - [3.3 Delete a Source](#33-delete-a-source)
 5. [**Group Management**](#group-management)
-   - [Get All Groups](#get-all-groups)
-   - [Add a New Group](#add-a-new-group)
-   - [Delete a Group](#delete-a-group)
+   - [4.0 Get All Groups](#40-get-all-groups)
+   - [4.1 Add a New Group](#41-add-a-new-group)
+   - [4.2 Delete a Group](#42-delete-a-group)
 6. [**User Management**](#user-management)
-   - [Create a New User](#create-a-new-user)
-   - [Edit an Existing User](#edit-an-existing-user)
-   - [Delete a User](#delete-a-user)
+   - [5.0 Create a New User](#50-create-a-new-user)
+   - [5.1 Edit an Existing User](#51-edit-an-existing-user)
+   - [5.2 Delete a User](#52-delete-a-user)
 7. [**List of Options**](#list-of-options)
    - [Language](#language)
    - [Roles](#roles)
@@ -37,7 +37,7 @@ The PrivateGPT API v1.3 provides a secure and structured way to interact with Pr
 
 ## Authentication
 
-### Login
+### 1.0 Login
 Get an access token for authentication in other API calls.
 The user requesting a token needs to be existing beforehand within PrivateGPT.
 
@@ -70,7 +70,7 @@ Note: The `{user-email}` and `{user-password}` correspond to the credentials of 
 ```
 Note: This token will be used in the following calls as {api-token}.
 
-### Logout
+### 1.1 Logout
 Invalidate the API-Token
 
 | **Method** | **Endpoint**                |
@@ -94,7 +94,7 @@ Invalidate the API-Token
 
 ## Chat Conversations
 
-### Start a New Chat
+### 2.0 Chat
 Start a new chat. To use the LLMs ‘document knowledge’ (RAG), one or more available groups must be provided, or usePublic needs to be
 true. If no groups are provided (or the list is empty) and usePublic is false the LLMs ‘general knowledge’ will be used instead.
 Please find the available languages below under List of options.
@@ -136,7 +136,7 @@ Important: If `usePublic` is set to false and no groups are provided, RAG will b
 ```
 This `chatId` will be used in the continuing of a chat as {chatId}.
 
-### Continue an Existing Chat
+### 2.1 Continue Chat
 Continue an already started chat.
 
 | **Method** | **Endpoint**                      |
@@ -172,7 +172,7 @@ Continue an already started chat.
 
 ---
 
-### Get Informations about an existing Chat
+### 2.2 Get Chat Informations
 | **Method** | **Endpoint**                      |
 |------------|-----------------------------------|
 | GET        | `{base-url}/api/v1/chats/{chatId}`|
@@ -206,7 +206,9 @@ Continue an already started chat.
 
 ## Source Management
 
-### Store a New Source via Markdown
+### 3.0 Create Source
+Store information into an existing Group.
+
 | **Method** | **Endpoint**                  |
 |------------|-------------------------------|
 | POST       | `{base-url}/api/v1/sources`   |
@@ -235,53 +237,9 @@ Continue an already started chat.
 }
 ```
 
-### Edit an Existing Source
-| **Method** | **Endpoint**                      |
-|------------|-----------------------------------|
-| PATCH      | `{base-url}/api/v1/sources/{sourceId}` |
+### 3.1 Get Source
+Get source informations about an existing group.
 
-**Headers:**
-- Accept: `application/json`
-- Authorization: `Bearer {api-token}`
-
-**Body:**
-```json
-{
-  "name": "My updated Title",
-  "groups": ["Updated Group"], // optional, list may be empty if source should be public
-  "content": "Updated content in Markdown format"
-}
-```
-All Fields are optional and remain unchanged if not provided.
-
-**Response:**
-```json
-{
-  "data": {},
-  "message": "success",
-  "status": 200
-}
-```
-
-### Delete a Source
-| **Method** | **Endpoint**                      |
-|------------|-----------------------------------|
-| DELETE     | `{base-url}/api/v1/sources/{sourceId}`|
-
-**Headers:**
-- Accept: `application/json`
-- Authorization: `Bearer {api-token}`
-
-**Response:**
-```json
-{
-  "data": {},
-  "message": "success",
-  "status": 200
-}
-```
-
-### Get all sources for the provided group
 | **Method** | **Endpoint**                        |
 |------------|-------------------------------------|
 | POST       | `{base-url}/api/v1/sources/group`   |
@@ -311,14 +269,99 @@ All Fields are optional and remain unchanged if not provided.
   "status": 200
 }
 ```
+
+### 3.2 List Sources
+
+| **Endpoint**          | `{base-url}/api/v1/sources/groups` |
+|------------------------|------------------------------------|
+| **Method**            | POST                              |
+| **Headers**           |                                  |
+| Accept                | `application/json`               |
+| Authorization         | `Bearer {api-token}`             |
+
+**Body:**
+```json
+{
+  "groupName": "Group A"
+}
+
+**Response:**
+
+{
+  "data": {
+    "sources": [
+      "9d29bfb6-m763-92ne-4f10-c9c28e4d94fa",
+      "fe8a1336-510b-4baf-8d2b-47f20c33e7d6",
+      "bcd69bc4-e3fc-4771-8526-ed7894574f13",
+      "c2df15f3-e4fe-4311-8b27-c37df49e047c",
+      "5fa13006-4aa9-401f-899c-c2aa995fb7a6"
+    ]
+  },
+  "message": "success",
+  "status": 200
+}
+
+
+### 3.3 Edit Source
+Update an existing Source.
+
+| **Method** | **Endpoint**                      |
+|------------|-----------------------------------|
+| PATCH      | `{base-url}/api/v1/sources/{sourceId}` |
+
+**Headers:**
+- Accept: `application/json`
+- Authorization: `Bearer {api-token}`
+
+**Body:**
+```json
+{
+  "name": "My updated Title",
+  "groups": ["Updated Group"], // optional, list may be empty if source should be public
+  "content": "Updated content in Markdown format"
+}
+```
+All Fields are optional and remain unchanged if not provided.
+
+**Response:**
+```json
+{
+  "data": {},
+  "message": "success",
+  "status": 200
+}
+```
+
+### 3.4 Delete Source
+Delete a source, be careful, this cannot be undone!
+
+| **Method** | **Endpoint**                      |
+|------------|-----------------------------------|
+| DELETE     | `{base-url}/api/v1/sources/{sourceId}`|
+
+**Headers:**
+- Accept: `application/json`
+- Authorization: `Bearer {api-token}`
+
+**Response:**
+```json
+{
+  "data": {},
+  "message": "success",
+  "status": 200
+}
+```
+
 ---
 
 ## Group Management
 
-### Get All Groups
+### 4.0 List Groups
 Get all available groups.
+
 `personalGroups:`   all groups the current user can access. Usable for chat.
-`assignableGroups:` all available groups. Usable for creating and editing a user and sources. If you're using PGPT MCP-Server, you can deny the access of lients to this option.
+`assignableGroups:` all available groups. Usable for creating and editing a user and sources. 
+                    If you're using PGPT MCP-Server, you can deny the access of lients to this option.
 
 | **Method** | **Endpoint**                |
 |------------|-----------------------------|
@@ -340,7 +383,7 @@ Get all available groups.
 }
 ```
 
-### Add a New Group
+### 4.1 Store Group
 | **Method** | **Endpoint**                |
 |------------|-----------------------------|
 | POST       | `{base-url}/api/v1/groups`  |
@@ -365,7 +408,7 @@ Get all available groups.
 }
 ```
 
-### Delete a Group
+### 4.2 Delete Group
 | **Method** | **Endpoint**                |
 |------------|-----------------------------|
 | DELETE     | `{base-url}/api/v1/groups`  |
@@ -394,7 +437,7 @@ Get all available groups.
 
 ## User Management
 
-### Create a New User
+### 5.0 Store User
 The identification of a user is in relation to the email address. Please find the different available roles please find them below under List of
 options.
 
@@ -431,7 +474,7 @@ options.
 }
 ```
 
-### Edit an Existing User
+### 5.1 Edit User
 | **Method** | **Endpoint**                      |
 |------------|-----------------------------------|
 | PATCH      | `{base-url}/api/v1/users`         |
@@ -466,7 +509,7 @@ Note: All other fields than `e-mail` are // optional and remain unchanged if not
 }
 ```
 
-### Delete a User
+### 5.2 Delete User
 | **Method** | **Endpoint**                |
 |------------|-----------------------------|
 | DELETE     | `{base-url}/api/v1/users`   |
