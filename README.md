@@ -278,9 +278,9 @@ Get source informations about an existing group.
 {
   "groupName": "Group A"
 }
-
+```
 ** Response**
-
+```json
 {
   "data": {
     "sources": [
@@ -432,7 +432,7 @@ Get all available groups.
 ## User Management
 
 ### 5.0 Store User
-The identification of a user is in relation to the email address. Please find the different available roles please find them below under List of
+The identification of a user is in relation to the email address. Please find the different available roles below under List of
 options.
 
 | **Method** | **Endpoint**                |
@@ -487,7 +487,7 @@ options.
   "timezone": "UTC", 
   "usePublic": true,
   "groups": ["Group A"],
-  "roles": ["Sources"],
+  "roles": ["system"],
   "activateFtp": true,
   "ftpPassword": "FTPPassword!"
 }
