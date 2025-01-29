@@ -10,7 +10,7 @@
    - [2.1 Continue Existing Chat](#21-continue-chat)
    - [2.2 Get Chat Informations](#22-get-chat-Informations)
 4. [**Source Management**](#source-management)
-   - [3.0 Store Source](#30-create-source)
+   - [3.0 Store Source](#30-store-source)
    - [3.1 Get Source](#31-get-source)
    - [3.2 List Sources](#32-list-sources)
    - [3.3 Edit Source](#33-edit-source)
@@ -48,6 +48,7 @@ The user requesting a token needs to be existing beforehand within PrivateGPT.
 
 **Headers:**
 - Accept: `application/json`
+- Authentication: `No Auth`
 
 **Body:**
 ```json
@@ -80,7 +81,7 @@ Invalidate the API-Token
 
 **Headers:**
 - Accept: `application/json`
-- Authorization: `Bearer {api-token}`
+- Authentication: `Bearer {api-token}`
 
 **Response:**
 ```json
@@ -126,10 +127,6 @@ Important: If `usePublic` is set to false and no groups are provided, RAG will b
   "data": {
     "chatId": "your-chat-id",
     "answer": "response-answer",
-    "sources": [
-                "source-id-1", 
-                "source-id-2"
-               ]
   },
   "message": "success",
   "status": 200
@@ -203,7 +200,7 @@ Continue an already started chat.
 
 ## Source Management
 
-### 3.0 Create Source
+### 3.0 Store Source
 Store information into an existing Group.
 
 | **Method** | **Endpoint**                  |
@@ -456,7 +453,7 @@ options.
   "timezone": "UTC", // optional
   "usePublic": true,
   "groups": ["Group A"],
-  "roles": ["Sources"],
+  "roles": ["system"],
   "activateFtp": true,
   "ftpPassword": "FTPPassword!"
 }
