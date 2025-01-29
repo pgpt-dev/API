@@ -142,7 +142,7 @@ Continue an already started chat.
 
 | **Method** | **Endpoint**                      |
 |------------|-----------------------------------|
-| POST       | `{base-url}/api/v1/chats/{chatId}`|
+| PATCH       | `{base-url}/api/v1/chats/{chatId}`|
 
 **Headers:**
 - Accept: `application/json`
@@ -161,10 +161,6 @@ Continue an already started chat.
   "data": {
     "chatId": "your-chat-id",
     "answer": "response-answer",
-    "sources": [
-                "source-id-1", 
-                "source-id-2"
-               ]
   },
   "message": "success",
   "status": 200
