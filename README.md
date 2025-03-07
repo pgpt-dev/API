@@ -1,6 +1,6 @@
-# Important Notice: Repository No Longer Exists
+# Important Notice: Repository does not exist at this place
 
-This repository is no longer maintained. You can find the current repository at:
+You can find the current repository at:
 
 [https://github.com/Fujitsu-AI/API](https://github.com/Fujitsu-AI/API)
 
